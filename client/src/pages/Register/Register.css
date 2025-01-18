@@ -1,0 +1,42 @@
+.registerPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 50px);
+}
+
+.registerPage form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    border: 5px solid #000;
+    border-radius: 15px;
+    padding: 80px 20px 20px 50px;
+    text-align: center;
+    position: relative;
+    gap: 20px;
+}
+
+.registerPage button {
+    background-color: #ff4b58;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.registerPage button:hover {
+    background-color: #e04350;
+}
+
+.registerPage input {
+    border-radius: 5px;
+    padding: 5px;
+}

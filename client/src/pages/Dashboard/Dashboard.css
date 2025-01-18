@@ -1,0 +1,139 @@
+.dashboardPage {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    height: 100%;
+}
+
+.input-form input, 
+.input-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-form textarea {
+    resize: none;
+    height: 70%;
+}
+
+.input-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4b58;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.input-form button:hover {
+    background-color: #e04350;
+}
+
+.notes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notes h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.notes div {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notes div h3 {
+    margin: 0 0 10px 0;
+}
+
+.notes div p {
+    margin: 0 0 10px 0;
+}
+
+.notes div svg {
+    cursor: pointer;
+    margin-right: 10px;
+    color: #555;
+}
+
+.notes div svg:hover {
+    color: #ff4b58;
+}
+
+.note {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    border: none;
+    border-radius: 16px;
+    padding: 24px;
+    width: 360px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note:hover {
+    transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.note-header {
+    font-weight: 700;
+    font-size: 22px;
+    color: #2a2a2a;
+    margin-bottom: 12px;
+}
+
+.note-body {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.note-icons {
+    display: flex;
+}

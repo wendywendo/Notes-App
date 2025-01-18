@@ -1,0 +1,29 @@
+nav {
+    background-color: #ff3a54;
+    color: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav .auth {
+    display: flex;
+    gap: 20px;
+}
+
+nav button {
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
