@@ -62,15 +62,9 @@ const loginUser = async (req, res) => {
 
         if (match) {
 
-            jwt.sign({ email: user.email, id: user._id, name: user.name }, process.env.JWT_SECRET, { expiresIn: '1d' }, (err, token) => {
+            jwt.sign({ email: user.email, id: user._id, name: user.name }, process.env.JWT_SECRET, {}, (err, token) => {
                 if (err) throw err;
-                
-                res.cookie('token', token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: 'Lax',
-                    maxAge: 24 * 60 * 60 * 1000, // 1 day
-                }).json(user);
+                res.cookie('token', token).json(user)
             })
             
         } else {
@@ -98,17 +92,13 @@ const getProfile = (req, res) => {
         })
 
     } else {
-        return res.status(401).json({ error: 'Unauthorized' });
+        res.json(null)
     }
 }
 
 const logoutUser = (req, res) => {
-    res.clearCookie('token', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'Lax',
-    }).json({ message: 'Logged out successfully!' });
-};
+    res.clearCookie('token').json({ message: 'Logged out successfully!' })
+}
 
 
 module.exports = {
