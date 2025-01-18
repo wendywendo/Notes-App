@@ -9,7 +9,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import { Toaster } from 'react-hot-toast'
 
 
-axios.defaults.baseURL = 'https://notes-app-alpha-gules.vercel.app'
+axios.defaults.baseURL = 'http://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {

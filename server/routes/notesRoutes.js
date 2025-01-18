@@ -6,7 +6,7 @@ const { addNote, getNotes, deleteNote, updateNote } = require('../controllers/no
 // Middleware
 router.use(cors({
     credentials: true,
-    origin: 'https://notes-app-59at.vercel.app'
+    origin:  'https://notes-app-59at.vercel.app'
 }))
 
 router.get('/', getNotes)
