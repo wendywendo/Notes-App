@@ -43,60 +43,58 @@ const registerUser = async (req, res) => {
 
 
 const loginUser = async (req, res) => {
+
     try {
+
         const { email, password } = req.body;
 
         // Check if user exists
         const user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(404).json({ error: 'User not found!' });
+            return res.status(404).json({
+                error: 'User not found!'
+            })
         }
 
         // Check if passwords match
-        const match = await comparePassword(password, user.password);
-        if (!match) {
-            return res.status(401).json({ error: 'Password incorrect' });
+        const match = await comparePassword(password, user.password)
+
+        if (match) {
+
+            jwt.sign({ email: user.email, id: user._id, name: user.name }, process.env.JWT_SECRET, {}, (err, token) => {
+                if (err) throw err;
+                res.cookie('token', token).json(user)
+            })
+            
+        } else {
+            return res.status(401).json({
+                error: 'Password incorrect'
+            })
         }
 
-        // Generate token
-        jwt.sign(
-            { email: user.email, id: user._id, name: user.name },
-            process.env.JWT_SECRET,
-            {},
-            (err, token) => {
-                if (err) {
-                    console.error('Token generation error:', err);
-                    return res.status(500).json({ error: 'Internal server error' });
-                }
 
-                res.cookie('token', token, { httpOnly: true }).json({ user, token });
-            }
-        );
     } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).json({ error: 'Something went wrong' });
+        console.log(error)
     }
-};
 
+}
 
 const getProfile = (req, res) => {
-    const { token } = req.cookies;
+    const { token } = req.cookies
 
-    if (!token) {
-        return res.status(401).json({ error: 'No token provided' });
+    if (token) {
+        
+        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+            if (err) throw err
+
+            res.json(user)
+        })
+
+    } else {
+        res.json(null)
     }
-
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-        if (err) {
-            console.error('Token verification error:', err);
-            return res.status(403).json({ error: 'Invalid or expired token' });
-        }
-
-        res.json(user);
-    });
-};
-
-
+}
 
 const logoutUser = (req, res) => {
     res.clearCookie('token', { httpOnly: true }).json({ message: 'Logged out successfully!' });
