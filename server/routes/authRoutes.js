@@ -6,7 +6,7 @@ const { test, registerUser, loginUser, getProfile, logoutUser } = require('../co
 // Middleware
 router.use(cors({
     credentials: true,
-    origin: 'https://notes-app-59at.vercel.app'
+    origin: 'http://localhost:5173'
 }))
 
 router.get('/', test)
