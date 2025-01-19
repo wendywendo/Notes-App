@@ -27,7 +27,9 @@ export default function Dashboard() {
         }
     }
 
-    const updateNote = async () => {
+    const updateNote = async (e) => {
+
+        e.preventDefault()
 
         try {
 
@@ -90,7 +92,7 @@ export default function Dashboard() {
 
         <form 
             className="input-form"
-            onSubmit={editing ? () => updateNote() : (e) => addNote(e)}
+            onSubmit={editing ? (e) => updateNote(e) : (e) => addNote(e)}
         >
             <input 
                 type="text" 
