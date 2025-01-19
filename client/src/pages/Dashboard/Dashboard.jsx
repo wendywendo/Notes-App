@@ -40,12 +40,12 @@ export default function Dashboard() {
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setEditing(false)
+            setTitle('')
+            setContent('')
+            setEditingId('')
         }
-
-        setEditing(false)
-        setTitle('')
-        setContent('')
-        setEditingId('')
     }
 
     const getUserNotes = async () => {
