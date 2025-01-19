@@ -66,7 +66,8 @@ const loginUser = async (req, res) => {
                 if (err) throw err;
                 res.cookie('token', token, {
                     httpOnly: true,
-                    secure: true
+                    secure: true,
+                    sameSite: 'None'
                 }).json(user)
             })
             
@@ -78,7 +79,8 @@ const loginUser = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        res.status(500).json({ error: 'Internal server error' });
     }
 
 }
@@ -86,21 +88,29 @@ const loginUser = async (req, res) => {
 const getProfile = (req, res) => {
     const { token } = req.cookies
 
-    if (token) {
-        
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if (err) throw err
-
-            res.json(user)
-        })
-
-    } else {
-        res.json(null)
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
+
+        
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+        if (err) {
+            console.error(err);
+            return res.status(401).json({ error: 'Token verification failed' });
+        }
+
+        res.json(user)
+    })
+
 }
 
 const logoutUser = (req, res) => {
-    res.clearCookie('token').json({ message: 'Logged out successfully!' })
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+    }).json({ message: 'Logged out successfully!' });
+    
 }
 
 
