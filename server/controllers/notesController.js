@@ -69,36 +69,16 @@ const deleteNote = async (req, res) => {
 
 }
 
-const updateNote = async (req, res) => {
-    try {
-        const { noteId, title, content } = req.body;
+// Update note
+const updateNote = async (req, res) => { 
 
-        // Validate inputs
-        if (!noteId || !title || !content) {
-            return res.status(400).json({ error: 'All fields are required' });
-        }
+    const { noteId, title, content } = req.body
 
-        // Update note and return the updated document
-        const updatedNote = await Note.findByIdAndUpdate(
-            noteId, // Find by note ID
-            { title, content }, // Fields to update
-            { new: true } // Return the updated document
-        );
+    Note.findByIdAndUpdate(noteId, { title: title, content: content })
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
 
-        // Check if the note exists
-        if (!updatedNote) {
-            return res.status(404).json({ error: 'Note not found' });
-        }
-
-        // Send the updated note as a response
-        res.json(updatedNote);
-
-    } catch (error) {
-        console.error('Error updating note:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-};
-
+}
 
 module.exports = {
     getNotes,
