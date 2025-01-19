@@ -6,10 +6,9 @@ import Register from './pages/Register/Register'
 import axios from 'axios'
 import { UserContextProvider } from '../context/UserContext'
 import Dashboard from './pages/Dashboard/Dashboard'
-import { Toaster } from 'react-hot-toast'
 
 
-axios.defaults.baseURL = 'https://notes-app-alpha-gules.vercel.app'
+axios.defaults.baseURL = 'http://localhost:8000' // https://notes-app-alpha-gules.vercel.app
 axios.defaults.withCredentials = true
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
   return (
     <UserContextProvider>
       <Navbar />
-      <Toaster position='bottom-right' toastOptions={{ duration: 2000}} />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login/>} />

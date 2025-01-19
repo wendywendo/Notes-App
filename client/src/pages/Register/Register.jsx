@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import { FaUser, FaLock } from 'react-icons/fa'
-import { toast } from 'react-hot-toast'
+import { ToastContainer, toast } from 'react-toastify';
 import './Register.css'
 
 export default function Register() {
@@ -22,10 +22,10 @@ export default function Register() {
       })
 
       if (data.error) {
-        toast.error(data.error)
+        toast(data.error)
       } else {
         setUserData({ name: '', email: '', password: '' })
-        toast.success('User created successfully. Redirecting to login...')
+        toast('User created successfully. Redirecting to login...')
         setTimeout(() => {
           navigate('/login')
         }, 2000);
@@ -36,55 +36,58 @@ export default function Register() {
   }
 
   return (
-    <div className="registerPage">
-      <form onSubmit={(e) => registerUser(e)}>
-        <FaUser className="user-icon" />
-        <h2>REGISTER</h2>
+    <main>
+      <ToastContainer />
+      <div className="registerPage">
+        <form onSubmit={(e) => registerUser(e)}>
+          <FaUser className="user-icon" />
+          <h2>REGISTER</h2>
 
-        <div className="formItem">
-          <div>
-            <FaUser/>
-            <label>Name</label>
+          <div className="formItem">
+            <div>
+              <FaUser/>
+              <label>Name</label>
+            </div>
+
+            <input 
+              type="text" 
+              value={userData.name}
+              onChange={(e) => setUserData({...userData, name: e.target.value})}
+              required={true}
+            />
+          </div>
+          
+          <div className="formItem">
+            <div>
+              <FaUser />
+              <label>Email</label>
+            </div>
+
+            <input 
+              type="email" 
+              value={userData.email}
+              onChange={(e) => setUserData({...userData, email: e.target.value})}
+              required={true}
+            />
           </div>
 
-          <input 
-            type="text" 
-            value={userData.name}
-            onChange={(e) => setUserData({...userData, name: e.target.value})}
-            required={true}
-          />
-        </div>
-        
-        <div className="formItem">
-          <div>
-            <FaUser />
-            <label>Email</label>
+          <div className="formItem">
+            <div>
+              <FaLock />
+              <label>Password</label>
+            </div>
+
+            <input 
+              type="password" 
+              value={userData.password}
+              onChange={(e) => setUserData({...userData, password: e.target.value})}
+              required={true}
+            />
           </div>
 
-          <input 
-            type="email" 
-            value={userData.email}
-            onChange={(e) => setUserData({...userData, email: e.target.value})}
-            required={true}
-          />
-        </div>
-
-        <div className="formItem">
-          <div>
-            <FaLock />
-            <label>Password</label>
-          </div>
-
-          <input 
-            type="password" 
-            value={userData.password}
-            onChange={(e) => setUserData({...userData, password: e.target.value})}
-            required={true}
-          />
-        </div>
-
-        <button type="submit">JOIN US</button>
-      </form> 
-    </div>
+          <button type="submit">JOIN US</button>
+        </form> 
+      </div>
+    </main>
   )
 }
