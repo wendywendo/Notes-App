@@ -8,7 +8,7 @@ import { UserContextProvider } from '../context/UserContext'
 import Dashboard from './pages/Dashboard/Dashboard'
 
 
-axios.defaults.baseURL = 'http://localhost:8000' // https://notes-app-alpha-gules.vercel.app
+axios.defaults.baseURL = 'https://notes-app-alpha-gules.vercel.app' 
 axios.defaults.withCredentials = true
 
 function App() {
